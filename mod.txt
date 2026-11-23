@@ -1,0 +1,11 @@
+{
+  "name": "Loadout Characters",
+  "description": "Remembers character preferences per loadout. Picks the first available preference in supported lobbies.",
+  "author": "Hypness",
+  "version": "1.0.2",
+  "blt_version": 2,
+  "hooks": [
+    { "hook_id": "lib/managers/multiprofilemanager", "script_path": "profiles.lua" },
+    { "hook_id": "lib/managers/blackmarketmanager", "script_path": "blackmarket.lua" }
+  ]
+}
