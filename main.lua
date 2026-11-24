@@ -139,12 +139,12 @@ function LC:select()
     if not s then return end
     local preferences = self:clean(managers.blackmarket:get_preferred_characters_list(), true)
     if not self:can_change(s) then
-        self:notice("Tercih kaydedildi. Lobide degisim icin herkes bu modu kullanmali ve lobi ekraninda olmali. Sonraki lobi girisinde tercih uygulanir.")
+        self:notice("Character preferences saved. To switch characters here, everyone must have the mod and be in the lobby or briefing screen. Your preferences will be used the next time you join a lobby.")
         return
     end
     if s:is_host() then
         if not self:assign(s, s:local_peer():id(), preferences) then
-            self:notice("Tercih edilen karakterlerin hepsi dolu; mevcut karakter korundu.")
+            self:notice("All preferred characters are taken. You will keep your current character.")
         end
     else
         local host = s:server_peer()
@@ -172,7 +172,7 @@ Hooks:Add("NetworkReceivedData", "LC_Network", function(sender, channel, data)
             LC:apply(message.peer, message.character)
         end
     elseif message.kind == "rejected" and not s:is_host() and peer == s:server_peer() then
-        LC:notice("Karakter degisimi uygulanamadi; tercihler kayitli, mevcut lobi karakteri korundu.")
+        LC:notice("Could not switch characters. Your preferences are saved, and you will keep your current character.")
     end
 end)
 
